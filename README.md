@@ -19,8 +19,11 @@
 ### Create a new profile, name it as u want but remember to change inside the code
 
 > [profile name?]
+>
 > aws_access_key_id=[insert id here]
+>
 > aws_secret_access_key=[insert secret key here]
+>
 > region=[insert region here]
 
 2. Run
