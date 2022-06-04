@@ -1,5 +1,6 @@
 from tokenize import String
 import boto3
+import time
 
 dev = boto3.session.Session(profile_name='nih-python')
 s3 = dev.resource('s3')
@@ -23,4 +24,20 @@ def bucket_copy_object(bucket_destination_name: String, source_bucket: String, o
 
     s3object.copy_object(CopySource = copy_source, Bucket = bucket_destination_name, Key = object_name)
 
-    print(copy_source)
+def bucket_copy_change_name(bucket_destination_name: String, source_bucket: String, object_name: String):
+    copy_source = {
+      'Bucket': source_bucket,
+      'Key': object_name
+    }
+
+    date_now = get_time()
+
+    updated_object = object_name+date_now
+    
+    s3object.copy_object(CopySource = copy_source, Bucket = bucket_destination_name, Key = updated_object)
+
+def get_time():
+    current_time = time.localtime()
+    final_time = time.strftime("%m-%d-%Y", current_time)
+    print(final_time)
+    return final_time
